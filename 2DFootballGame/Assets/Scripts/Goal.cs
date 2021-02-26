@@ -19,16 +19,21 @@ public class Goal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
+        StartCoroutine(LoadLevelDelay());
+        Destroy(collider.gameObject);
+    }
+
+    IEnumerator LoadLevelDelay()
+    {
+        
         if (Scores.goalnum == 20)
         {
-            SceneManager.LoadScene("Scene2");
+            yield return new WaitForSeconds(2);
+            SceneManager.LoadScene("Winner");
         }
         else
         {
             Scores.goalnum += 1;
         }
-        
-        Destroy(collider.gameObject);
     }
-
 }
